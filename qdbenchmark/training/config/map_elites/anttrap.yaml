@@ -1,0 +1,36 @@
+defaults:
+  - logging: default
+  - validate_experiment_config
+  - _self_
+  - override /hydra/job_logging: none
+  - override /hydra/hydra_logging: none
+
+# directory parameters
+# directory parameters
+hydra:
+  output_subdir: hydra
+  run:
+    dir: "outputs/training/MAP-Elites/${env_name}/seed_${seed}"
+
+  sweep:
+    dir: "outputs/training/MAP-Elites/${env_name}"
+    subdir: "seed_${seed}"
+
+env_name: anttrap
+seed: 0
+num_iterations:
+time_limit: 8400 # 14400
+
+# ME config
+episode_length: 250
+policy_hidden_layer_sizes: [256, 256]
+batch_size: 1000
+crossover_percentage: 1.
+single_init_state: False
+iso_sigma: 0.005
+line_sigma: 0.05
+
+# Grid config
+num_centroids: 1024
+num_init_cvt_samples: 50000
+fitness_range: [-200, 2000.]

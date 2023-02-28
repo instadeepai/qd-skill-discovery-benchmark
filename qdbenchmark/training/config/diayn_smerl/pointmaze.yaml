@@ -1,0 +1,48 @@
+defaults:
+  - logging: default
+  - validate_experiment_config
+  - _self_
+  - override /hydra/job_logging: none
+  - override /hydra/hydra_logging: none
+
+# directory parameters
+hydra:
+  output_subdir: ./hydra
+  run:
+    dir: "./outputs/training/DIAYN-SMERL/${env_name}/seed_${seed}/"
+  sweep:
+    dir: "./outputs/training/DIAYN-SMERL/${env_name}"
+    subdir: "seed_${seed}"
+
+env_name: pointmaze
+seed: 0
+env_batch_size: 200
+warmup_steps: 0
+buffer_size: 1_000_000
+num_steps:
+time_limit: 5400
+
+# SAC config
+batch_size: 256
+episode_length: 250
+grad_updates_per_step: 1.0
+tau: 0.005
+normalize_observations: false
+learning_rate: 3e-4
+alpha_init: 0.1
+discount: 0.99
+reward_scaling: 1.
+hidden_layer_sizes: [256, 256]
+fix_alpha: true
+# DIAYN config
+num_skills: 5
+descriptor_full_state: false
+# SMERL config
+diversity_reward_scale: 2.0
+smerl_target: -66
+smerl_margin: 6.6
+
+# Grid config
+num_centroids: 1024
+num_init_cvt_samples: 50000
+fitness_range: [-500., 0.]

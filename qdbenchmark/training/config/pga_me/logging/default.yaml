@@ -1,0 +1,5 @@
+# Log config
+log_period: 200
+save_checkpoints_period: 400
+metrics_subsample: 10
+

@@ -1,0 +1,48 @@
+defaults:
+  - logging: default
+  - validate_experiment_config
+  - _self_
+  - override /hydra/job_logging: none
+  - override /hydra/hydra_logging: none
+
+# directory parameters
+hydra:
+  output_subdir: ./hydra
+  run:
+    dir: "./outputs/training/DIAYN-SMERL/${env_name}/seed_${seed}/"
+  sweep:
+    dir: "./outputs/training/DIAYN-SMERL/${env_name}"
+    subdir: "seed_${seed}"
+
+env_name: walker2d_uni
+seed: 0
+env_batch_size: 200
+warmup_steps: 0
+buffer_size: 1_000_000
+num_steps:
+time_limit: 14400
+
+# SAC config
+batch_size: 256
+episode_length: 250
+tau: 0.005
+grad_updates_per_step: 1.0
+normalize_observations: false
+hidden_layer_sizes: [256, 256]
+alpha_init: 0.1
+fix_alpha: true
+discount: 0.99
+reward_scaling: 10.
+learning_rate: 3e-4
+# DIAYN config
+num_skills: 5
+descriptor_full_state: true
+# SMERL config
+diversity_reward_scale: 2.0
+smerl_target: 1180
+smerl_margin: 118
+
+# Grid config
+num_centroids: 1024
+num_init_cvt_samples: 50000
+fitness_range: [-200., 1500.]

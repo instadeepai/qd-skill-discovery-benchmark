@@ -1,0 +1,25 @@
+defaults:
+  - validate_experiment_config
+  - _self_
+  - override /hydra/job_logging: none
+  - override /hydra/hydra_logging: none
+
+# directory parameters
+hydra:
+  output_subdir: hydra
+  run:
+    dir: "outputs/adaptation/${algorithm_name}/${env_name}/${adaptation_name}/${adaptation_idx}"
+  sweep:
+    dir: "outputs/adaptation/${algorithm_name}/${env_name}/${adaptation_name}"
+    subdir: "${adaptation_idx}"
+
+repertoire_path: .
+run_config_path: .
+
+env_name: .
+algorithm_name: .
+
+num_init_state: 100
+
+adaptation_name: actuator_update
+adaptation_idx: 0

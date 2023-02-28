@@ -1,0 +1,50 @@
+defaults:
+  - logging: default
+  - validate_experiment_config
+  - _self_
+  - override /hydra/job_logging: none
+  - override /hydra/hydra_logging: none
+
+# directory parameters
+hydra:
+  output_subdir: hydra
+  run:
+    dir: "outputs/training/PGA-ME/${env_name}/seed_${seed}"
+
+  sweep:
+    dir: "outputs/training/PGA-ME/${env_name}"
+    subdir: "seed_${seed}"
+
+env_name: ant_uni
+seed: 0
+num_iterations:
+time_limit: 14400
+buffer_size: 1_000_000
+
+# PGA-ME config
+episode_length: 250
+policy_hidden_layer_sizes: [256, 256]
+env_batch_size: 100
+single_init_state: False
+iso_sigma: 0.005
+line_sigma: 0.05
+proportion_mutation_ga: 0.5
+num_critic_training_steps: 300
+num_pg_training_steps: 100
+
+# TD3 config
+batch_size: 256
+critic_hidden_layer_sizes: [256, 256]
+critic_learning_rate: 3e-4
+greedy_learning_rate: 3e-4
+policy_learning_rate: 1e-3
+noise_clip: 0.5
+policy_noise: 0.2
+discount: 0.99
+reward_scaling: 1.0
+soft_tau_update: 0.005
+
+# Grid config
+num_centroids: 1024
+num_init_cvt_samples: 50000
+fitness_range: [-1000., 2500.]
