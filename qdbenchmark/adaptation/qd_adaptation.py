@@ -43,6 +43,13 @@ def run_adaptation_qd(config: ExperimentConfig) -> None:
 
     run_config = OmegaConf.load(config.run_config_path)
 
+    if config.algorithm_name not in config.run_config_path:
+        logger.warning("Algorithm name not in run_config_path")
+
+    assert (
+        run_config.env_name == config.env_name
+    ), "Must pass a config of the selected environment"
+
     adaptation_constants = ADAPTATION_CONSTANTS[config.adaptation_name]
     adaptation_constants_env = adaptation_constants[run_config.env_name]
 

@@ -1,14 +1,12 @@
 import functools
 from typing import Any, Callable, Dict, List, Optional, Union
 
-import brax
 import jax.numpy as jnp
 from qdax.environments.base_wrappers import QDEnv, StateDescriptorResetWrapper
 from qdax.environments.bd_extractors import (
     get_feet_contact_proportion,
     get_final_xy_position,
 )
-from qdax.environments.exploration_wrappers import MazeWrapper, TrapWrapper
 from qdax.environments.locomotion_wrappers import (
     FeetContactWrapper,
     NoForwardRewardWrapper,
@@ -17,7 +15,11 @@ from qdax.environments.locomotion_wrappers import (
 from qdax.environments.pointmaze import PointMaze
 from qdbenchmark.environments.actuator_wrappers import ActuatorStrengthWrapper
 from qdbenchmark.environments.default_position_wrapper import DefaultPositionWrapper
+from qdbenchmark.environments.exploration_wrappers import MazeWrapper, TrapWrapper
+from qdbenchmark.environments.hurdles_wrapper import HurdlesWrapper
 from qdbenchmark.environments.physics_wrappers import FrictionWrapper, GravityWrapper
+
+import brax
 
 # experimentally determinated offset (except for antmaze)
 # should be enough to have only positive rewards but no guarantee
@@ -72,6 +74,11 @@ _qdbenchmark_custom_envs = {
         "wrappers": [FeetContactWrapper],
         "kwargs": [{}],
     },
+    "halfcheetah_hurdles": {
+        "env": "halfcheetah",
+        "wrappers": [HurdlesWrapper],
+        "kwargs": [{}],
+    },
 }
 
 
@@ -86,7 +93,7 @@ def create(
     friction_multiplier: Optional[float] = None,
     actuator_update: Optional[Dict[str, float]] = None,
     default_position_update: Optional[Dict[str, jnp.ndarray]] = None,
-    qdbenchmark_wrappers_kwargs: Optional[List] = None,
+    qdax_wrappers_kwargs: Optional[List] = None,
     **kwargs: Any,
 ) -> Union[brax.envs.Env, QDEnv]:
     """Creates an Env with a specified brax system.
@@ -108,10 +115,10 @@ def create(
 
         # roll with qdbenchmark wrappers
         wrappers = _qdbenchmark_custom_envs[env_name]["wrappers"]
-        if qdbenchmark_wrappers_kwargs is None:
+        if qdax_wrappers_kwargs is None:
             kwargs_list = _qdbenchmark_custom_envs[env_name]["kwargs"]
         else:
-            kwargs_list = qdbenchmark_wrappers_kwargs
+            kwargs_list = qdax_wrappers_kwargs
 
         for wrapper, kwargs in zip(wrappers, kwargs_list):  # type: ignore
             env = wrapper(env, base_env_name, **kwargs)  # type: ignore

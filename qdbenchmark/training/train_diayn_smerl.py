@@ -5,7 +5,6 @@ from dataclasses import dataclass
 from functools import partial
 from typing import Any, Optional, Tuple
 
-import brax
 import hydra
 import jax
 import jax.numpy as jnp
@@ -13,7 +12,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from hydra.core.config_store import ConfigStore
 from jax.flatten_util import ravel_pytree
-from qdax import environments
 from qdax.baselines.diayn_smerl import DIAYNSMERL, DiaynSmerlConfig
 from qdax.core.containers.mapelites_repertoire import (
     MapElitesRepertoire,
@@ -22,11 +20,14 @@ from qdax.core.containers.mapelites_repertoire import (
 from qdax.core.neuroevolution.buffers.buffer import QDTransition, ReplayBuffer
 from qdax.core.neuroevolution.buffers.trajectory_buffer import TrajectoryBuffer
 from qdax.core.neuroevolution.mdp_utils import TrainingState
-from qdax.core.neuroevolution.sac_utils import do_iteration_fn, warmstart_buffer
+from qdax.core.neuroevolution.sac_td3_utils import do_iteration_fn, warmstart_buffer
 from qdax.utils.metrics import CSVLogger, default_qd_metrics
 from qdax.utils.plotting import plot_2d_map_elites_repertoire, plot_skills_trajectory
+from qdbenchmark import environments
 from qdbenchmark.utils.logging import LoggingConfig
 from qdbenchmark.utils.metrics import log_accumulated_metrics
+
+import brax
 
 
 @dataclass
@@ -135,7 +136,6 @@ def train(config: ExperimentConfig) -> None:
         # SAC config
         batch_size=config.batch_size,
         episode_length=config.episode_length,
-        grad_updates_per_step=config.grad_updates_per_step,
         tau=config.tau,
         normalize_observations=config.normalize_observations,
         learning_rate=config.learning_rate,

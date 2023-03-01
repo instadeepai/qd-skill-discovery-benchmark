@@ -1,0 +1,3 @@
+# Log config
+log_period: 10
+save_checkpoints_period: 200

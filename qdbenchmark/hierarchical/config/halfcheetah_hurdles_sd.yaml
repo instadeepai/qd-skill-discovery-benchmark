@@ -1,0 +1,35 @@
+defaults:
+  - validate_experiment_config
+  - _self_
+  - override /hydra/job_logging: none
+  - override /hydra/hydra_logging: none
+
+# directory parameters
+hydra:
+  output_subdir: hydra
+  run:
+    dir: "outputs/hierarchical/${algorithm_name}/${env_name}/${seed}"
+  sweep:
+    dir: "outputs/hierarchical/${algorithm_name}/${env_name}"
+    subdir: "${seed}"
+
+
+
+episode_length: 250
+env_batch_size: 2048
+num_h_steps: 10
+num_steps: 200_000_000
+omit_obs: 0
+discount: 0.99
+seed: 0
+normalize_observations: false
+
+
+learning_rate: 1e-4
+entropy_cost: 1e-3
+
+algorithm_name: .
+env_name: halfcheetah_hurdles
+policy_path: .
+
+log_frequency: 1

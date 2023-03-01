@@ -10,7 +10,6 @@ import jax
 import jax.numpy as jnp
 import matplotlib.pyplot as plt
 from hydra.core.config_store import ConfigStore
-from qdax import environments
 from qdax.core.containers.mapelites_repertoire import (
     MapElitesRepertoire,
     compute_cvt_centroids,
@@ -23,6 +22,7 @@ from qdax.tasks.brax_envs import create_brax_scoring_fn
 from qdax.types import RNGKey
 from qdax.utils.metrics import CSVLogger, default_qd_metrics
 from qdax.utils.plotting import plot_2d_map_elites_repertoire
+from qdbenchmark import environments
 from qdbenchmark.utils.logging import LoggingConfig
 from qdbenchmark.utils.metrics import log_accumulated_metrics
 

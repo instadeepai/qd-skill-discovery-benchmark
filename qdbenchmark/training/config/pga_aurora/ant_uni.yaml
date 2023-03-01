@@ -1,0 +1,71 @@
+defaults:
+  - logging: default
+  - validate_experiment_config
+  - _self_
+  - override /hydra/job_logging: none
+  - override /hydra/hydra_logging: none
+
+# directory parameters
+hydra:
+  output_subdir: hydra
+  run:
+    dir: "outputs/training/PGA-AURORA/${env_name}/seed_${seed}"
+
+  sweep:
+    dir: "outputs/training/PGA-AURORA/${env_name}"
+    subdir: "seed_${seed}"
+
+# Env config
+seed: 0
+env_name: ant_uni
+episode_length: 250
+policy_hidden_layer_sizes: [256, 256]
+observation_option: no_sd # full, no_sd, only_sd
+hidden_size: 5
+l_value_init: 0.2
+traj_sampling_freq: 10
+max_observation_size: 25
+prior_descriptor_dim: 2
+lstm_batch_size: 128
+
+
+# ME config
+num_iterations:
+time_limit: 8400 # TODO - update this
+
+# num_evaluations: 500000 #0
+env_batch_size: 100
+single_init_state: False
+discard_dead: False
+
+replay_buffer_size: 1000000
+
+# TD3 config
+batch_size: 256
+critic_hidden_layer_size: [256, 256]
+critic_learning_rate: 3e-4
+greedy_learning_rate: 3e-4
+policy_learning_rate: 1e-3
+noise_clip: 0.5
+policy_noise: 0.2
+discount: 0.99
+reward_scaling: 1.0
+soft_tau_update: 0.005
+
+
+# PGAME config
+iso_sigma: 0.005
+line_sigma: 0.05
+proportion_mutation_ga: 0.5
+num_critic_training_steps: 300
+num_pg_training_steps: 100
+
+# Grid config
+num_centroids: 1024
+passive_num_centroids: 1024
+num_init_cvt_samples: 50000
+fitness_range: [-1000., 2500.]
+
+
+
+

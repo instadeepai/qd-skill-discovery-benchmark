@@ -1,0 +1,50 @@
+defaults:
+  - logging: default
+  - validate_experiment_config
+  - _self_
+  - override /hydra/job_logging: none
+  - override /hydra/hydra_logging: none
+
+# directory parameters
+hydra:
+  output_subdir: hydra
+  run:
+    dir: "outputs/training/AURORA/${env_name}/seed_${seed}"
+
+  sweep:
+    dir: "outputs/training/AURORA/${env_name}"
+    subdir: "seed_${seed}"
+
+
+# Env config
+seed: 0
+env_name: antmaze
+episode_length: 500
+policy_hidden_layer_sizes: [256, 256]
+observation_option: only_sd # full, no_sd, only_sd
+hidden_size: 5
+l_value_init: 0.2
+traj_sampling_freq: 10
+max_observation_size: 25
+prior_descriptor_dim: 2
+lstm_batch_size: 128
+
+# ME config
+num_iterations:
+time_limit: 8400 # TODO - update this
+
+# num_evaluations: 500000 #0
+batch_size: 1000
+single_init_state: False
+discard_dead: False
+
+# Emitter config # TODO: update
+iso_sigma: 0.005 # 0.3 #0.01
+line_sigma: 0.05 # 0.1
+crossover_percentage: 1.0
+
+# Grid config
+num_centroids: 1024
+passive_num_centroids: 1024
+num_init_cvt_samples: 50000
+fitness_range: [-20000., 0.]
