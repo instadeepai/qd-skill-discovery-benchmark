@@ -59,7 +59,7 @@ RUN apt-get update && \
     python3-dev=3.8* \
     python3-pip &&\
     rm -rf /var/lib/apt/lists/*
-RUN pip --no-cache-dir install --no-deps git+https://github.com/adaptive-intelligent-robotics/QDax@tmp/qd-benchmark\
+RUN pip --no-cache-dir install --no-deps git+https://github.com/adaptive-intelligent-robotics/QDax@qdbenchmark\
     && rm -rf /tmp/*
 
 USER $USER

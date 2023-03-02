@@ -165,14 +165,16 @@ def train(config: ExperimentConfig) -> None:
 
     # Init population of controllers
     random_key, subkey = jax.random.split(random_key)
-    keys = jax.random.split(subkey, num=config.batch_size)
-    fake_batch = jnp.zeros(shape=(config.batch_size, env.observation_size))
+    keys = jax.random.split(subkey, num=config.env_batch_size)
+    fake_batch = jnp.zeros(shape=(config.env_batch_size, env.observation_size))
     init_variables = jax.vmap(policy_network.init)(keys, fake_batch)
 
     # Create the initial environment states
     random_key, init_state_subkey = jax.random.split(random_key)
     keys = jnp.repeat(
-        jnp.expand_dims(init_state_subkey, axis=0), repeats=config.batch_size, axis=0
+        jnp.expand_dims(init_state_subkey, axis=0),
+        repeats=config.env_batch_size,
+        axis=0,
     )
     reset_fn = jax.jit(jax.vmap(env.reset))
     init_states = reset_fn(keys)
@@ -204,10 +206,11 @@ def train(config: ExperimentConfig) -> None:
     # Define the usual scoring function
     random_key, subkey = jax.random.split(random_key)
 
+    usual_bd_extraction_fn = environments.behavior_descriptor_extractor[config.env_name]
     usual_scoring_fn, random_key = create_brax_scoring_fn(
         env=env,
         policy_network=policy_network,
-        bd_extraction_fn=bd_extraction_fn,
+        bd_extraction_fn=usual_bd_extraction_fn,
         random_key=subkey,
         episode_length=config.episode_length,
         deterministic=True,
@@ -621,7 +624,7 @@ def train(config: ExperimentConfig) -> None:
 
             fig, ax = plot_2d_map_elites_repertoire(
                 centroids=centroids,
-                repertoire_fitness=repertoire.fitnesses,
+                repertoire_fitnesses=repertoire.fitnesses,
                 minval=jnp.nanmin(repertoire.descriptors[..., :2], axis=0),
                 maxval=jnp.nanmax(repertoire.descriptors[..., :2], axis=0),
                 use_centroids=False,

@@ -9,11 +9,10 @@ defaults:
 hydra:
   output_subdir: hydra
   run:
-    dir: "outputs/brax-PGA-AURORA/${env_name}/\
-      seed_${seed}/${now:%Y-%m-%d}/${now:%H-%M-%S}"
+    dir: "outputs/training/PGA-AURORA/${env_name}/seed_${seed}"
+
   sweep:
-    dir: "outputs/brax-PGA-AURORA/${env_name}/\
-      ${now:%Y-%m-%d}/${now:%H-%M-%S}"
+    dir: "outputs/training/PGA-AURORA/${env_name}"
     subdir: "seed_${seed}"
 
 # config of the experiment
