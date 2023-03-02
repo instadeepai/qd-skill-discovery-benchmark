@@ -20,7 +20,7 @@ env_batch_size: 200
 warmup_steps: 0
 buffer_size: 1_000_000
 num_steps:
-time_limit: 14400
+time_limit: 8400
 
 # SAC config
 batch_size: 256
