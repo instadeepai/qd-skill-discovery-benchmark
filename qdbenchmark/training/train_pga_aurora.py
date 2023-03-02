@@ -50,8 +50,6 @@ class ExperimentConfig:
     # num_evaluations: int
     env_batch_size: int
     single_init_state: bool
-    discard_dead: bool
-
     # Grid config
     num_centroids: int
     passive_num_centroids: int

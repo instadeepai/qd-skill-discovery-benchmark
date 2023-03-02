@@ -34,7 +34,7 @@ num_iterations:
 time_limit: 8400
 
 env_batch_size: 100
-discard_dead: False
+
 single_init_state: False
 
 replay_buffer_size: 1000000

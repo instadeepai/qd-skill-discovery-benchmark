@@ -36,7 +36,7 @@ time_limit: 8400 # TODO - update this
 # num_evaluations: 500000 #0
 env_batch_size: 100
 single_init_state: False
-discard_dead: False
+
 
 replay_buffer_size: 1000000
 

@@ -28,6 +28,11 @@ make dev_container
 Inside the container, you can run the `nvidia-smi` command to verify that your GPU is found.
 
 
+## Run experiments from the paper
+
+### Training
+### Adaptation 
+### Hierarchical
 
 ## Contributors
 

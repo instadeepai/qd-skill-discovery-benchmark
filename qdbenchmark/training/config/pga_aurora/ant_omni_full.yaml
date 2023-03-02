@@ -36,7 +36,7 @@ time_limit: 8400 # TODO - update this
 # num_evaluations: 500000 #0
 batch_size: 1000
 single_init_state: False
-discard_dead: False
+
 
 # Emitter config # TODO: update 
 iso_sigma: 0.005 # 0.3 #0.01

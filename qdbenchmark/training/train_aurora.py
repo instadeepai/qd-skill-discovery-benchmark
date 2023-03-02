@@ -49,7 +49,6 @@ class ExperimentConfig:
     # num_evaluations: int
     batch_size: int
     single_init_state: bool
-    discard_dead: bool
 
     # Grid config
     num_centroids: int
