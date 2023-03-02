@@ -31,8 +31,77 @@ Inside the container, you can run the `nvidia-smi` command to verify that your G
 ## Run experiments from the paper
 
 ### Training
+#### Syntax
+To train an algorithm on an environemnt use the following command:
+```python3
+make train script_name=[SCRIPT_NAME] env_name=[ENV_NAME]
+```
+This will load the default config in `qdbenchmark/training/config` and launch the training. The list of available scripts and configs are present in `qdbenchmark/training/`.
+
+
+#### Example
+For instance to train **MAP-ELITES** on the environment **Halfcheetah Uni** run:
+
+```python
+make train script_name=train_map_elites.py env_name=halfcheetah_uni
+```
+
 ### Adaptation 
+#### Syntax
+To perform adaptations tasks, the user must provide a path to the policy/repertoire resulting from the training of an agent as well as the path to the config used to train this agent. Three commands are available, one for each of the three adaptation-task families (Gravity multiplier, Actuator update or Default position change).
+
+
+For the QD algorithms:
+```python3
+make adaptation_gravity_qd repertoire_path=[PATH_TO_REPERTOIRE] run_config_path=[PATH_TO_CONFIG] env_name=[ENV_NAME] algorithm_name=[ALGORITHM_NAME]
+```
+```python3
+make adaptation_actuator_qd repertoire_path=[PATH_TO_REPERTOIRE] run_config_path=[PATH_TO_CONFIG] env_name=[ENV_NAME] algorithm_name=[ALGORITHM_NAME]
+```
+```python3
+make adaptation_position_qd repertoire_path=[PATH_TO_REPERTOIRE] run_config_path=[PATH_TO_CONFIG] env_name=[ENV_NAME] algorithm_name=[ALGORITHM_NAME]
+```
+
+and for the Skill Discovery algorithms:
+```python3
+make adaptation_gravity_sd policy_path=[PATH_TO_POLICY] run_config_path=[PATH_TO_CONFIG] env_name=[ENV_NAME] algorithm_name=[ALGORITHM_NAME]
+```
+```python3
+make adaptation_actuator_sd policy_path=[PATH_TO_POLICY] run_config_path=[PATH_TO_CONFIG] env_name=[ENV_NAME] algorithm_name=[ALGORITHM_NAME]
+```
+```python3
+make adaptation_position_sd policy_path=[PATH_TO_POLICY] run_config_path=[PATH_TO_CONFIG] env_name=[ENV_NAME] algorithm_name=[ALGORITHM_NAME]
+```
+
+#### Example
+
+Sample configs and checkpoints are provided to give an example, for instance the user can run the following command:
+```python3
+make adaptation_gravity_sd policy_path=sample/sample_policy/dads-reward-ant-uni-policy-0.npy run_config_path=sample/sample_config/dads_reward_ant_uni.yaml env_name=ant_uni algorithm_name=DADS+REWARD
+```
+
 ### Hierarchical
+#### Syntax
+To perform the Halfcheetah-Hurdle hierarchical task, the user should also provid a policy/repertoire path. The syntax is the following:
+
+For QD algorithms:
+```python
+make hierarchical_qd repertoire_path=[PATH_TO_REPERTOIRE] algorithm_name=[ALGORITHM_NAME]
+```
+
+For Skill Discovery algorithms:
+```python
+make hierarchical_sd policy_path=[PATH_TO_POLICY] algorithm_name=[ALGORITHM_NAME]
+```
+
+#### Example
+Sample checkpoints are provided to give an example, for instance the user can run the following command:
+```python3
+make hierarchical_qd repertoire_path=sample/sample_repertoire/map_elites_halfcheetah_uni/ algorithm_name=MAP-ELITES
+```
+
+
+
 
 ## Contributors
 

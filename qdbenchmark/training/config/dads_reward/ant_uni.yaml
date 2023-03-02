@@ -46,3 +46,4 @@ diversity_reward_scale: 2.0
 num_centroids: 1024
 num_init_cvt_samples: 50000
 fitness_range: [-1000., 2500.]
+descriptors_range:

@@ -6,8 +6,8 @@ declare -a algorithms=(
         "train_diayn_smerl.py"
         "train_map_elites.py"
         "train_pga_me.py"
-        #"train_aurora"
-        #"train_pga_aurora"
+        "train_aurora"
+        "train_pga_aurora"
 )
 
 declare -a environments=(

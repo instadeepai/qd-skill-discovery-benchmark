@@ -48,3 +48,4 @@ smerl_margin: 6.6
 num_centroids: 1024
 num_init_cvt_samples: 50000
 fitness_range: [-1000., 0.]
+descriptors_range:
