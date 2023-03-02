@@ -9,10 +9,10 @@ defaults:
 hydra:
   output_subdir: hydra
   run:
-    dir: "outputs/training/MAP-Elites/${env_name}/seed_${seed}"
+    dir: "outputs/training/MAP-ELITES/${env_name}/seed_${seed}"
 
   sweep:
-    dir: "outputs/training/MAP-Elites/${env_name}"
+    dir: "outputs/training/MAP-ELITES/${env_name}"
     subdir: "seed_${seed}"
 
 env_name: ant_omni
