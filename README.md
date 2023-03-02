@@ -5,7 +5,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
-This repository contains the code for the paper "Neuroevolution is a Competitive Alternative to Reinforcement Learning for Skill Discovery.", [(Chalumeau et al., 2023)](https://arxiv.org/abs/2210.03516) :computer: :zap:.
+This repository contains the code for the paper "Neuroevolution is a Competitive Alternative to Reinforcement Learning for Skill Discovery.", [(Chalumeau et al., 2023)](https://openreview.net/forum?id=6BHlZgyPOZY) :computer: :zap:.
 
 
 ## First-time setup
@@ -50,9 +50,11 @@ Inside the container, you can run the `nvidia-smi` command to verify that your G
 If you use the code or data in this package, please cite:
 
 ```bibtex
-@article{chalumeau2022neuroevolution,
-  title={Neuroevolution is a Competitive Alternative to Reinforcement Learning for Skill Discovery},
-  author={Chalumeau, Felix and Boige, Raphael and Lim, Bryan and Mac{\'e}, Valentin and Allard, Maxime and Flajolet, Arthur and Cully, Antoine and Pierrot, Thomas},
-  journal={arXiv preprint arXiv:2210.03516},
-  year={2022}
+@inproceedings{
+chalumeau2023neuroevolution,
+title={Neuroevolution is a Competitive Alternative to Reinforcement Learning for Skill Discovery},
+author={Felix Chalumeau and Raphael Boige and Bryan Lim and Valentin Mac{\'e} and Maxime Allard and Arthur Flajolet and Antoine Cully and Thomas PIERROT},
+booktitle={International Conference on Learning Representations},
+year={2023},
+url={https://openreview.net/forum?id=6BHlZgyPOZY}
 }
