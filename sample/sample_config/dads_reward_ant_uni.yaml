@@ -1,0 +1,38 @@
+logging:
+  log_period: 100000
+  save_checkpoints_period: 1000000
+  metrics_subsample: 20
+  save_to_gcp: null
+  bucket_name: null
+  save_to_ichor: null
+  neptune_user: null
+  neptune_project_name: null
+  neptune_api_token: null
+env_name: ant_uni
+seed: 0
+env_batch_size: 200
+warmup_steps: 0
+buffer_size: 100000
+num_steps: null
+time_limit: 14400
+batch_size: 256
+episode_length: 250
+grad_updates_per_step: 1.0
+tau: 0.005
+normalize_observations: false
+learning_rate: 0.0003
+alpha_init: 0.1
+discount: 0.99
+reward_scaling: 10.0
+hidden_layer_sizes:
+- 256
+- 256
+fix_alpha: true
+num_skills: 5
+descriptor_full_state: true
+diversity_reward_scale: 2.0
+num_centroids: 1024
+num_init_cvt_samples: 50000
+fitness_range:
+- -1000.0
+- 2500.0

@@ -1,0 +1,22 @@
+logging:
+  log_period: 40
+  save_checkpoints_period: 200
+  metrics_subsample: 10
+env_name: halfcheetah_uni
+seed: 0
+batch_size: 1000
+num_iterations: null
+time_limit: 8400
+episode_length: 250
+num_centroids: 16
+num_init_cvt_samples: 50000
+crossover_percentage: 1.0
+policy_hidden_layer_sizes:
+- 256
+- 256
+single_init_state: false
+iso_sigma: 0.005
+line_sigma: 0.05
+fitness_range:
+- -1000.0
+- 2200.0
