@@ -5,8 +5,13 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
-This repository contains the code for the paper "Neuroevolution is a Competitive Alternative to Reinforcement Learning for Skill Discovery.", [(Chalumeau, Boige et al., 2023)](https://openreview.net/forum?id=6BHlZgyPOZY) :computer: :zap:.
 
+
+
+<img align="right" src="https://github.com/instadeepai/qd-skill-discovery-benchmark/blob/main/images/pga_me_halfcheetah.gif" alt="alternate text" width="400" height="400">
+
+
+This repository contains the code for the paper "Neuroevolution is a Competitive Alternative to Reinforcement Learning for Skill Discovery.", [(Chalumeau, Boige et al., 2023)](https://openreview.net/forum?id=6BHlZgyPOZY) :computer: :zap:.
 
 ## First-time setup
 
