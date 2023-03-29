@@ -172,7 +172,7 @@ def train(config: ExperimentConfig) -> None:
         descriptor_full_state=config.descriptor_full_state,
         # SMERL config
         diversity_reward_scale=config.diversity_reward_scale,
-        smerl_target=jnp.inf,
+        smerl_target=-jnp.inf,
         smerl_margin=0.0,
     )
 
