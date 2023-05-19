@@ -100,13 +100,13 @@ def train(config: ExperimentConfig) -> None:
 
     if config.env_name == "anttrap":
         wrappers_kwargs = [
-            {"minval": [0.0, -8.0], "maxval": [jnp.inf, 8.0]},
+            {"minval": [0.0, -8.0], "maxval": [1e10, 8.0]},
             {},
         ]
 
     elif config.env_name == "ant_omni":
         wrappers_kwargs = [
-            {"minval": [-jnp.inf, -jnp.inf], "maxval": [jnp.inf, jnp.inf]},
+            {"minval": [-1e10, -1e10], "maxval": [1e10, 1e10]},
             {},
         ]
 
@@ -233,9 +233,15 @@ def train(config: ExperimentConfig) -> None:
     warmump_duration = time.time() - init_warmup_time
     logger.warning(f"Duration of warmup: {warmump_duration:.2f}s")
 
+    if config.descriptors_range is None:
+        minval, maxval = env.behavior_descriptor_limits
+
+    else:
+        minval = config.descriptors_range[0]
+        maxval = config.descriptors_range[1]
+
     # Compute the centroids
     logger.warning("--- Compute the CVT centroids ---")
-    minval, maxval = env.behavior_descriptor_limits
     centroids, random_key = compute_cvt_centroids(
         num_descriptors=env.behavior_descriptor_length,
         num_init_cvt_samples=config.num_init_cvt_samples,

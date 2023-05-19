@@ -123,8 +123,8 @@ def train(config: ExperimentConfig) -> None:
 
     csv_logger = CSVLogger("metrics.csv", header=["metric_name", "step", "value"])
 
-    print("Env observation dim: ", env.observation_size)
-    print("Env action dim: ", env.action_size)
+    # print("Env observation dim: ", env.observation_size)
+    # print("Env action dim: ", env.action_size)
 
     # Init a random key
     random_key = jax.random.PRNGKey(config.seed)
@@ -310,7 +310,7 @@ def train(config: ExperimentConfig) -> None:
     default_update_base = 10
     update_base = int(jnp.ceil(default_update_base / config.logging.log_period))
     schedules = jnp.cumsum(jnp.arange(update_base, 1000, update_base))
-    print("Schedules: ", schedules)
+    # print("Schedules: ", schedules)
 
     model_params = train_seq2seq.get_initial_params(
         model, subkey, (1, observations_dims[0], observations_dims[-1])
@@ -495,8 +495,8 @@ def train(config: ExperimentConfig) -> None:
             repertoire.genotypes, random_key=random_key
         )
 
-        print("Eval fitnesses: ", eval_fitnesses)
-        print("Eval descriptors: ", eval_descriptors)
+        # print("Eval fitnesses: ", eval_fitnesses)
+        # print("Eval descriptors: ", eval_descriptors)
 
         passive_repertoire = passive_repertoire.add(
             repertoire.genotypes,
@@ -629,13 +629,6 @@ def train(config: ExperimentConfig) -> None:
                 break
 
     duration = time.time() - init_time
-
-    logger.warning("--- Final metrics ---")
-    logger.warning(f"Duration: {duration:.2f}s")
-    logger.warning(f"Training duration: {total_training_time:.2f}s")
-    logger.warning(f"QD Score: {metrics['qd_score'][-1]:.2f}")
-    logger.warning(f"Coverage: {metrics['coverage'][-1]:.2f}%")
-
     # Save final plot
     if env.behavior_descriptor_length == 2:
         fig, ax = plot_2d_map_elites_repertoire(
