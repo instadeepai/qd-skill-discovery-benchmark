@@ -37,7 +37,7 @@ Inside the container, you can run the `nvidia-smi` command to verify that your G
 
 ### Training
 #### Syntax
-To train an algorithm on an environemnt use the following command:
+To train an algorithm on an environment use the following command:
 ```python3
 make train script_name=[SCRIPT_NAME] env_name=[ENV_NAME]
 ```
@@ -87,7 +87,7 @@ make adaptation_gravity_sd policy_path=sample/sample_policy/dads-reward-ant-uni-
 
 ### Hierarchical
 #### Syntax
-To perform the Halfcheetah-Hurdle hierarchical task, the user should also provid a policy/repertoire path. The syntax is the following:
+To perform the Halfcheetah-Hurdle hierarchical task, the user should also provide a policy/repertoire path. The syntax is the following:
 
 For QD algorithms:
 ```python
