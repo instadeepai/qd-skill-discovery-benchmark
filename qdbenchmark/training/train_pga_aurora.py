@@ -27,6 +27,7 @@ from qdax.tasks.brax_envs import (
 )
 from qdax.utils import train_seq2seq
 from qdax.utils.metrics import CSVLogger
+
 from qdbenchmark import environments
 from qdbenchmark.utils.logging import LoggingConfig
 from qdbenchmark.utils.plotting import plot_2d_map_elites_repertoire
@@ -284,7 +285,7 @@ def train(config: ExperimentConfig) -> None:
 
     @jax.jit
     def update_scan_fn(carry: Any, unused: Any) -> Any:
-        """Scan the udpate function."""
+        """Scan the update function."""
         (
             repertoire,
             emitter_state,
@@ -295,12 +296,7 @@ def train(config: ExperimentConfig) -> None:
         ) = carry
 
         # update
-        (
-            repertoire,
-            emitter_state,
-            metrics,
-            random_key,
-        ) = aurora.update(
+        (repertoire, emitter_state, metrics, random_key,) = aurora.update(
             repertoire,
             emitter_state,
             random_key,

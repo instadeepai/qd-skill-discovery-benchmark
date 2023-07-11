@@ -1,6 +1,7 @@
 import functools
 from typing import Any, Callable, Dict, List, Optional, Union
 
+import brax
 import jax.numpy as jnp
 from qdax.environments.base_wrappers import QDEnv, StateDescriptorResetWrapper
 from qdax.environments.bd_extractors import (
@@ -13,15 +14,14 @@ from qdax.environments.locomotion_wrappers import (
     XYPositionWrapper,
 )
 from qdax.environments.pointmaze import PointMaze
+
 from qdbenchmark.environments.actuator_wrappers import ActuatorStrengthWrapper
 from qdbenchmark.environments.default_position_wrapper import DefaultPositionWrapper
 from qdbenchmark.environments.exploration_wrappers import MazeWrapper, TrapWrapper
 from qdbenchmark.environments.hurdles_wrapper import HurdlesWrapper
 from qdbenchmark.environments.physics_wrappers import FrictionWrapper, GravityWrapper
 
-import brax
-
-# experimentally determinated offset (except for antmaze)
+# experimentally determined offset (except for antmaze)
 # should be enough to have only positive rewards but no guarantee
 reward_offset = {
     "pointmaze": 2.3431,
@@ -111,7 +111,7 @@ def create(
             env = brax.envs._envs[base_env_name](legacy_spring=True, **kwargs)
         elif base_env_name in _qdbenchmark_envs.keys():
             # WARNING: not general!! temporary trick
-            env = _qdbenchmark_envs[base_env_name](**kwargs)
+            env = _qdbenchmark_envs[base_env_name](**kwargs)  # type: ignore
 
         # roll with qdbenchmark wrappers
         wrappers = _qdbenchmark_custom_envs[env_name]["wrappers"]
